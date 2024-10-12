@@ -1,3 +1,18 @@
+
+@font-face {
+  font-family: "Exo 2";
+  src: url("fonts/Exo2-VariableFont_wght.ttf") format("truetype"); /* Adjust the path as needed */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Exo 2";
+  src: url("fonts/Exo2-Italic-VariableFont_wght.ttf") format("truetype"); /* Adjust the path as needed */
+  font-weight: normal;
+  font-style: italic;
+}
+
 html,
 body {
   overflow: hidden;
@@ -34,6 +49,53 @@ body {
   position: relative;
 }
 
+body.light {background-color: #888888;}
+
+body.light h1, body.light {color: #b3ff00;}
+
+body.light h2, p, a {color: #fffdfd;}
+
+body.light .menuSelection button {background-color: #fffefe; color: black;}
+
+
+
+.checkbox {
+  opacity: 0;
+  position: relative;
+}
+
+.checkbox-label {
+  background-color: rgb(104, 106, 108);
+  width: 50px;
+  height: 26px;
+  border-radius: 50px;
+  position: relative;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+}
+
+.fa-moon {color: #f1c40f;}
+
+.fa-sun {color: #f39c12;}
+
+.checkbox-label .ball {
+  background-color: #fff;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .checkbox-label .ball {
+  transform: translateX(24px);
+}
+
 .top-box {
   position: sticky;
   top: 0;
@@ -66,32 +128,42 @@ body {
 }
 
 #map-container {
-  padding-top: 10%;
   position: relative;
-  border: 1px solid white;
-  width: 75vw;
+  width: 100%;
   height: 80vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   margin: 0 auto;
 }
 
 #map {
-  width: 100%;
+  position: relative;
+  width: 80%;
   height: 100%;
 }
 
-#info {
-  float: left;
-  position: relative;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: rgb(255, 0, 195);
-  text-align: center;
+.menuSelection {
+  position: absolute;
+  top: 50%;
+  left: -150px;
+  transform: translateY(-50%);
+  display: flex;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  height: 60px;
+}
+
+.menuSelection button {
+  background-color: black;
+  color: white;
+  border-radius: 60px;
   padding: 10px;
-  box-sizing: border-box;
+  margin: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 h1 {
@@ -163,24 +235,7 @@ li a {
   font-size: 20px;
 }
 
-#Info-title {
-  text-align: center;
-  color: white;
-  margin-bottom: 15px;
-}
 
-#Into-text {
-  top: auto;
-  text-align: center;
-  color: white;
-  margin-top: 10px;
-}
-
-#middle-text {
-  text-align: center;
-  color: white;
-  margin-top: 10px;
-}
 
 .burger {
   object-fit: cover;
@@ -311,23 +366,35 @@ dialog[open]::backdrop {
   color: rgb(255, 0, 212);
 }
 
+@media (max-width: 1200px) {
+  .menuSelection {
+    left: -120px; /* Adjust position for smaller screens */
+  }
+
+  .menuSelection button {
+    font-size: 1.2rem; /* Adjust font size for smaller screens */
+    padding: 8px; /* Adjust padding for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .menuSelection {
+    left: -100px; /* Adjust position for tablets */
+  }
+
+  .menuSelection button {
+    font-size: 1rem; /* Adjust font size for tablets */
+    padding: 6px; /* Adjust padding for tablets */
+  }
+}
+
 @media (max-width: 480px) {
-  .info-box {
-    width: 100%;
-    margin-top: 10px;
+  .menuSelection {
+    left: -80px; /* Adjust position for mobile phones */
   }
-}
 
-@media (min-width: 481px) and (max-width: 768px) {
-  .info-box {
-    width: 80%;
-    margin-top: 10px;
-  }
-}
-
-@media (min-width: 769px) {
-  .info-box {
-    width: 50%;
-    margin-top: 15%;
+  .menuSelection button {
+    font-size: 0.8rem; /* Adjust font size for mobile phones */
+    padding: 4px; /* Adjust padding for mobile phones */
   }
 }

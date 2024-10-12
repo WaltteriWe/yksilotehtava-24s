@@ -1,3 +1,5 @@
+
+
 @property --gradient-angle {
   syntax: "<angle>";
   initial-value: 0deg;
@@ -41,6 +43,50 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
+}
+
+body.light {background-color: #ffffff; color: #000000;}
+
+body.light h1 {color: #b3ff00;}
+
+body.light p {color: #000000;}
+
+
+.checkbox {
+  opacity: 0;
+  position: relative;
+}
+
+.checkbox-label {
+  background-color: #111;
+  width: 50px;
+  height: 26px;
+  border-radius: 50px;
+  position: relative;
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+}
+
+.fa-moon {color: #f1c40f;}
+
+.fa-sun {color: #f39c12;}
+
+.checkbox-label .ball {
+  background-color: #fff;
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  border-radius: 50%;
+  transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .checkbox-label .ball {
+  transform: translateX(24px);
 }
 
 * {
@@ -102,20 +148,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#info {
-  float: left;
-  position: relative;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: rgb(255, 0, 195);
-  /*width: 50%;
-      height: 41%;*/
-  text-align: center;
-  padding: 10px;
-  box-sizing: border-box;
 }
 
 h1 {
@@ -426,7 +458,6 @@ dialog[open]::backdrop {
   }
 }
 
-/* Tablets (481px to 768px) */
 @media (min-width: 481px) and (max-width: 768px) {
   #hero-image {
     height: 40vh;
@@ -442,7 +473,6 @@ dialog[open]::backdrop {
   }
 }
 
-/* Desktops (769px and up) */
 @media (min-width: 769px) {
   #hero-image {
     height: 50vh;
@@ -455,5 +485,16 @@ dialog[open]::backdrop {
   .info-box {
     width: 50%;
     margin-top: 15%;
+  }
+}
+
+@media (min-width: 419px){
+  #hero-image {
+    height: 30vh;
+  }
+
+  #h1 {
+    font-size: .5em;
+    
   }
 }

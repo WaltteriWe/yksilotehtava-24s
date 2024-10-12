@@ -1,10 +1,8 @@
-import * as L from 'leaflet';
+import * as L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
-document.addEventListener('DOMContentLoaded', () => {
-  const map = L.map('map').setView([51.505, -0.09], 13);
+var map = L.map("map").setView([60.22407579575061, 24.758567542678975], 30);
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution:
-      '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(map);
-});
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "© OpenStreetMap contributors",
+}).addTo(map);

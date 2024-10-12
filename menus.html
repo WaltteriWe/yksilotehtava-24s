@@ -4,17 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="HurrDurrBurrGerr" />
+    <meta name="description" content="StudentRestaurant IO" />
     <title>StudentRestaurant IO</title>
-    <link rel="stylesheet" href="menus.css" />
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="./menus.css" />
     <link
       rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha384-dyB6l5N8i1l5j5g6i5g6i5g6i5g6i5g6i5g6i5g6i5g6i5g6i5g6i5g6i5g6i5g6i5g6"
+      crossorigin="anonymous"
     />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="./dist/main.js"></script>
-    <script src="map.js"></script>
+    <script type="module" src="./main.ts"></script>
+    <script type="module" src="./light-mode.ts"></script>
+    <script type="module" src="./map.ts"></script>
   </head>
   <body>
     <div class="top-box">
@@ -30,12 +31,27 @@
       <div id="logging-inning">
         <button id="login">
           <img src="./img/login-icon.jpeg" alt="logo" />
+          <form src="./main.ts"></form>
         </button>
+      </div>
+      <div>
+        <input type="checkbox" class="checkbox" id="checkbox" />
+        <label for="checkbox" class="checkbox-label">
+          <span class="ball"></span>
+          <i class="fa-solid fa-moon"></i>
+          <i class="fa-solid fa-sun"></i> 
+        </label>
       </div>
     </div>
 
     <div id="map-container">
       <div id="map"></div>
+    </div>
+
+    
+    <div class="menuSelection">
+      <button id="menu1" class="menu-button">Päivän lista</button>
+      <button id="menu2" class="menu-button">Viikon lista</button>
     </div>
 
     <div class="footer">

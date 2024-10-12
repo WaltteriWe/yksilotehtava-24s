@@ -2,75 +2,62 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/app-icon.svg" />
-    <link href="main.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Example Vite PWA" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="StudentRestaurant IO" />
+    <title>StudentRestaurant IO</title>
+    <link rel="stylesheet" href="./front_page.css" />
     <link
-      rel="apple-touch-icon"
-      href="/icons/icon-192x192.png"
-      sizes="192x192"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha384-dyB6l5N8i1l5j5g6i5g6i5g6i5g6i5g6i5g6i5g6i5g6i5g6i5g6i5g6i5g6i5g6i5g6"
+      crossorigin="anonymous"
     />
-    <meta name="theme-color" content="#ffffff" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-    <title>Vite + TS</title>
+    <script type="module" src="./src/main.ts"></script>
+    <script type="module" src="./light-mode.ts"></script>
   </head>
-
   <body>
-    <div class="container">
-      <h1>Vite PWA Example</h1>
-      <section id="login">
-        <h2>Login</h2>
-        <p>Login to get user data</p>
-        <form id="login-form">
-          <div class="form-control">
-            <input id="username" type="text" name="username" />
-            <label for="username">Usename</label>
-          </div>
-          <div class="form-control">
-            <input id="password" type="password" name="password" />
-            <label for="password">Password</label>
-          </div>
-          <div class="form-control">
-            <input type="submit" value="Login" class="button" />
-          </div>
-        </form>
+    <div class="top-box">
+      <div id="site-title"><h1>StudentRestaurant IO</h1></div>
+      <div id="navigation">
+        <nav>
+          <ul id="nav-bar">
+            <li><a href="./front_page.html">Home</a></li>
+            <li><a href="./menus.html">Menus</a></li>
+          </ul>
+        </nav>
+      
+      </div>
+      <div id="logging-inning">
+        <button id="login">
+          <img src="./img/login-icon.jpeg" alt="logo" />
+        </button>
+      </div>
+      <div>
+        <input type="checkbox" class="checkbox" id="checkbox">
+        <label for="checkbox" class="checkbox-label">
+          <i class="fa-solid fa-moon"></i>
+          <i class="fa-solid fa-sun"></i>
+          <span class="ball"></span>
+        </label>
+      </div>
+    </div>
+
+    <div id="middle">
+      <section id="Hero">
+        <header id="hero-image"></header>
+        <div id="hero-text">
+          <h2>Welcome to StudentRestaurant IO</h2>
+          <p>
+            You can find your closest student restaurant by pressing the "Menus"
+            section at the top of the site
+          </p>
+        </div>
       </section>
-      <section id="profile">
-        <h2>Profile</h2>
-        <p>Username: <span id="username-target"></span></p>
-        <p>email: <span id="email-target"></span></p>
-        <img id="avatar-target" src="" alt="Avatar" />
-        <hr />
-        <h2>Edit profile</h2>
-        <form id="profile-form">
-          <div class="form-control">
-            <input id="profile-username" type="text" name="username" />
-            <label for="profile-username">Username</label>
-          </div>
-          <div class="form-control">
-            <input id="profile-email" type="email" name="email" />
-            <label for="profile-email">Email</label>
-          </div>
-          <div class="form-control">
-            <input type="submit" value="Update" class="button" />
-          </div>
-        </form>
-        <hr />
-        <h2>Upload avatar</h2>
-        <form id="avatar-form">
-          <div class="form-control">
-            <input id="avatar" type="file" name="avatar" />
-            <label for="avatar">Choose image</label>
-          </div>
-          <div class="form-control">
-            <input type="submit" value="Uppload" class="button" />
-          </div>
-        </form>
-      </section>
+    </div>
+
+    <div class="footer">
+      <p>© 2024 Waltteri Westerholm.</p>
     </div>
   </body>
 </html>
