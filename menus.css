@@ -15,7 +15,7 @@
 
 html,
 body {
-  overflow: hidden;
+  overflow: cover;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -77,10 +77,6 @@ body.light .menuSelection button {background-color: #fffefe; color: black;}
   align-items: left;
 }
 
-.fa-moon {color: #f1c40f;}
-
-.fa-sun {color: #f39c12;}
-
 .checkbox-label .ball {
   background-color: #fff;
   width: 22px;
@@ -121,13 +117,18 @@ body.light .menuSelection button {background-color: #fffefe; color: black;}
   align-items: center;
 }
 
+.fa-moon {color: #f1c40f;}
+
+.fa-sun {color: #f39c12;}
+
 #site-title {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#map-container {
+#menu-container {
+  overflow: auto;
   position: relative;
   width: 100%;
   height: 80vh;
@@ -137,10 +138,14 @@ body.light .menuSelection button {background-color: #fffefe; color: black;}
   margin: 0 auto;
 }
 
-#map {
+#menu {
   position: relative;
   width: 80%;
   height: 100%;
+}
+
+#menu-container dialog{
+  overflow: hidden;
 }
 
 .menuSelection {
@@ -176,6 +181,31 @@ h1 {
   text-align: center;
   color: rgb(255, 0, 153);
   text-decoration: underline;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0;
+  padding: 0;
+}
+
+th {
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+  font-weight: normal;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+
+td {
+  border-bottom: 1px solid #ccc;
+  padding: 0.5em 1em;
+}
+
+.highlight {
+  font-weight: bold;
+  background-color: rgb(194, 194, 235);
 }
 
 @media (max-width: 1200px) {

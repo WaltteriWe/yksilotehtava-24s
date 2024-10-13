@@ -2,7 +2,7 @@ import {errorModal, restaurantModal, restaurantRow} from './components';
 import {fetchData} from './functions';
 import {DailyMenu} from './interfaces/menu';
 import {Restaurant} from './interfaces/Restaurant';
-import {apiUrl, positionOptions} from './interfaces/Variables';
+import {apiUrl, positionOptions} from './variables';
 
 const modal = document.querySelector('dialog');
 if (!modal) {
@@ -124,9 +124,9 @@ const success = async (pos: GeolocationPosition) => {
 navigator.geolocation.getCurrentPosition(success, error, positionOptions);
 
 document.addEventListener('DOMContentLoaded', () => {
-    const menuContainer = document.getElementById('menu-container');
+    const mapContainer = document.getElementById('meny-container');
 
-    if (menuContainer) {
+    if (mapContainer) {
       const menuContent = document.createElement('div');
       menuContent.innerHTML = '<h1>Meny</h1>';
     } else {

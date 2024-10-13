@@ -133,16 +133,6 @@ body {
   margin-bottom: 20px;
 }
 
-.info-box {
-  position: absolute;
-  float: left;
-  height: 250px;
-  width: 50%;
-  border: 1px solid var(--tausta);
-  background-color: var(--tausta);
-  box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.784);
-  margin-top: 15%;
-}
 
 #site-title {
   display: flex;
@@ -311,32 +301,6 @@ li a {
   text-align: center;
   color: white;
   margin-top: 10px;
-}
-
-.burger {
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 120px;
-  height: 120px;
-  margin: 0 auto 10px auto;
-  border: 2px solid;
-  float: right;
-  clear: left;
-  border: 2px solid;
-  border-color: rgba(255, 0, 0, 0);
-  border-radius: 70px;
-  box-shadow: 2px 2px 4px var(--tausta);
-  right: 0;
-  top: -30px;
-}
-
-.burger::after {
-  content: "";
-  clear: both;
-  display: table;
 }
 
 #home {
