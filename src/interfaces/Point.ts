@@ -3,4 +3,4 @@ type Point = {
     coordinates: number[];
   }
   
-  export {Point};
+  export type {Point};
