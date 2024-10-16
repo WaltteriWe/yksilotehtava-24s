@@ -12,4 +12,4 @@ type Restaurant = {
   company: string;
 };
 
-export {Restaurant};
+export type {Restaurant};

@@ -15,7 +15,7 @@
 
 html,
 body {
-  overflow: cover;
+  overflow: auto;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -54,9 +54,6 @@ body.light {background-color: #888888;}
 body.light h1, body.light {color: #b3ff00;}
 
 body.light h2, p, a {color: #fffdfd;}
-
-body.light .menuSelection button {background-color: #fffefe; color: black;}
-
 
 
 .checkbox {
@@ -168,6 +165,26 @@ body.light .menuSelection button {background-color: #fffefe; color: black;}
   padding: 10px;
   margin: 10px;
   font-size: 1.5rem;
+  cursor: pointer;
+}
+
+#napit {
+  background-color: #88888800;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 10px;
+}
+
+#napit button {
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  border-radius: 60px;
+  padding: 10px;
+  margin: 10px;
+  font-size: 1rem;
   cursor: pointer;
 }
 
@@ -335,6 +352,7 @@ dialog[open] {
 }
 
 dialog {
+  overflow: auto;
   border-radius: 35px;
   position: absolute;
   top: 50%;
@@ -343,7 +361,7 @@ dialog {
   opacity: 0;
   transition: opacity 0.7s ease-out, transform 0.7s ease-out,
     overlay 0.7s ease-out allow-discrete, display 0.7s ease-out allow-discrete;
-  background-color: #00000000;
+  background-color: #ffffff9f;
 }
 
 ::backdrop {

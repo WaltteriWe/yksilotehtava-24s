@@ -12,6 +12,7 @@ type Course = {
   
   type WeeklyMenu = {
     days: Day[];
+    courses: Course[];
   };
   
-  export {DailyMenu, WeeklyMenu, Course, Day};
+  export type {Course, DailyMenu, Day, WeeklyMenu};

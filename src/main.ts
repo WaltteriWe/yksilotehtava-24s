@@ -1,6 +1,6 @@
 import {errorModal, restaurantModal, restaurantRow} from './components';
 import {fetchData} from './functions';
-import {DailyMenu} from './interfaces/menu';
+import {DailyMenu, WeeklyMenu} from './interfaces/Menu';
 import {Restaurant} from './interfaces/Restaurant';
 import {apiUrl, positionOptions} from './interfaces/Variables';
 
@@ -45,6 +45,16 @@ const createTable = (restaurants: Restaurant[]) => {
 
         const menuHtml = restaurantModal(restaurant, menu);
         modal.insertAdjacentHTML('beforeend', menuHtml);
+
+        modal.showModal();
+
+        const weeklyMenu = await fetchData<WeeklyMenu>(
+          apiUrl + `/restaurants/weekly/${restaurant._id}/fi`
+        );
+        console.log(weeklyMenu);
+
+        const weeklyHtml = restaurantModal(restaurant, weeklyMenu);
+        modal.insertAdjacentHTML('beforeend', weeklyHtml);
 
         modal.showModal();
       } catch (error) {

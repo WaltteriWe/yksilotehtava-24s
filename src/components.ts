@@ -1,4 +1,4 @@
-import {DailyMenu} from './interfaces/menu';
+import {DailyMenu} from './interfaces/Menu';
 import {Restaurant} from './interfaces/Restaurant';
 
 const restaurantRow = (restaurant: Restaurant) => {
