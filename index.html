@@ -6,51 +6,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="StudentRestaurant IO" />
     <title>StudentRestaurant IO</title>
-    <link rel="stylesheet" href="./front_page.css" />
+    <link rel="stylesheet" href="./menus.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
       crossorigin="anonymous"
     />
+    <script type="module" src="/src/main.ts"></script>
     <script type="module" src="./light-mode.ts"></script>
+    <!-- <script type="module" src="./map.ts"></script> -->
   </head>
   <body>
     <div class="top-box">
       <div id="site-title"><h1>StudentRestaurant IO</h1></div>
       <div id="navigation">
-        <nav>
-          <ul id="nav-bar">
-            <li><a href="./index.html">Home</a></li>
-            <li><a href="./menus.html">Menus</a></li>
-          </ul>
-        </nav>
-      
       </div>
+
       <div>
-        <input type="checkbox" class="checkbox" id="checkbox">
+        <input type="checkbox" class="checkbox" id="checkbox" />
         <label for="checkbox" class="checkbox-label">
+          <span class="ball"></span>
           <i class="fa-solid fa-moon"></i>
           <i class="fa-solid fa-sun"></i>
-          <span class="ball"></span>
         </label>
       </div>
     </div>
 
-    <div id="middle">
-      <section id="Hero">
-        <header id="hero-image"></header>
-        <div id="hero-text">
-          <h2>Welcome to StudentRestaurant IO</h2>
-          <p>
-            You can find your closest student restaurant by pressing the "Menus"
-            section at the top of the site
-          </p>
-        </div>
-      </section>
+    <div id="menu-container">
+      <div id="menu">
+        <table>
+          <div id="napit">
+            <button id="daily-menu">Daily Menu</button>
+            <button id="weekly-menu">Weekly Menu</button>
+            <button id="reset">Reset</button>
+            <table id="menu-content"></table>
+          </div>
+          <!-- add restaurants here -->
+        </table>
+        <dialog></dialog>
+      </div>
     </div>
 
     <div class="footer">
-      <p>© 2024 Waltteri Westerholm.</p>
+      <p>© 2024 Waltteri Westerholm</p>
     </div>
   </body>
 </html>
