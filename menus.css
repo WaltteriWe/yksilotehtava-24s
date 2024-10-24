@@ -168,23 +168,13 @@ body.light h2, p, a {color: #fffdfd;}
   cursor: pointer;
 }
 
-#napit {
-  background-color: #88888800;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin: 10px;
-}
-
-#napit button {
-  background-color: rgba(0, 0, 0, 0);
+button {
+  background-color: black;
   color: white;
   border-radius: 60px;
   padding: 10px;
   margin: 10px;
-  font-size: 1rem;
+  font-size: 1.3rem;
   cursor: pointer;
 }
 
@@ -255,7 +245,7 @@ h3 {
   display: inline;
 }
 
-.footer {
+footer {
   background-color: black;
   text-align: center;
   padding: 10px 0;

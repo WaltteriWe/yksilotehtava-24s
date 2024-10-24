@@ -1,10 +1,10 @@
-import {errorModal, restaurantModal, restaurantRow} from './components';
-import {fetchData} from './functions';
-import {DailyMenu} from './interfaces/Menu';
-import {Restaurant} from './interfaces/Restaurant';
-import {apiUrl, positionOptions} from './interfaces/Variables';
+import { errorModal, restaurantModal, restaurantRow, weeklyMenu } from './components';
+import { fetchData } from './functions';
+import { DailyMenu } from './interfaces/Menu';
+import { Restaurant } from './interfaces/Restaurant';
+import { apiUrl, positionOptions } from './interfaces/Variables';
 
-const modal = document.querySelector('dialog');
+const modal = document.querySelector('dialog') as HTMLDialogElement;
 if (!modal) {
   throw new Error('Modal not found');
 }
@@ -27,17 +27,17 @@ const createTable = (restaurants: Restaurant[]) => {
     table.appendChild(tr);
     tr.addEventListener('click', async () => {
       try {
-        // remove all highlights
+        // Remove all highlights
         const allHighs = document.querySelectorAll('.highlight');
         allHighs.forEach((high) => {
           high.classList.remove('highlight');
         });
-        // add highlight
+        // Add highlight
         tr.classList.add('highlight');
-        // add restaurant data to modal
+        // Add restaurant data to modal
         modal.innerHTML = '';
 
-        // fetch menu
+        // Fetch menu
         const menu = await fetchData<DailyMenu>(
           apiUrl + `/restaurants/daily/${restaurant._id}/fi`
         );
@@ -46,17 +46,22 @@ const createTable = (restaurants: Restaurant[]) => {
         const menuHtml = restaurantModal(restaurant, menu);
         modal.insertAdjacentHTML('beforeend', menuHtml);
 
-        modal.showModal();
+        // Create the weekly menu button
+        const weeklyMenuBtn = document.createElement('button');
+        weeklyMenuBtn.textContent = 'Weekly Menu';
+        weeklyMenuBtn.addEventListener('click', async () => {
+          try {
+            const weeklyHtml = await weeklyMenu(restaurant._id); // Ensure this returns a string
+            modal.insertAdjacentHTML('beforeend', weeklyHtml);
+          } catch (error) {
+            console.error('Error fetching weekly menu:', error);
+            modal.innerHTML = errorModal((error as Error).message);
+            modal.showModal();
+          }
+        });
 
-        // const weeklyMenu = await fetchData<WeeklyMenu>(
-        //   apiUrl + `/restaurants/weekly/${restaurant._id}/fi`
-        // );
-        // console.log(weeklyMenu);
-
-        // const weeklyHtml = restaurantModal(restaurant, weeklyMenu);
-        // modal.insertAdjacentHTML('beforeend', weeklyHtml);
-
-        // modal.showModal();
+        modal.appendChild(weeklyMenuBtn); // Append the button to the modal
+        modal.showModal(); // Show the modal
       } catch (error) {
         modal.innerHTML = errorModal((error as Error).message);
         modal.showModal();
@@ -86,60 +91,39 @@ const success = async (pos: GeolocationPosition) => {
       return distanceA - distanceB;
     });
     createTable(restaurants);
-    // buttons for filtering
-    const sodexoBtn = document.querySelector('#sodexo');
-    const compassBtn = document.querySelector('#compass');
-    const resetBtn = document.querySelector('#reset');
-
-    if (!sodexoBtn) {
-      console.log('Button not found');
-      return;
-    }
-
-    sodexoBtn.addEventListener('click', () => {
-      const sodexoRestaurants = restaurants.filter(
-        (restaurant) => restaurant.company === 'Sodexo'
-      );
-      console.log(sodexoRestaurants);
-      createTable(sodexoRestaurants);
-    });
-
-    if (!compassBtn) {
-      console.log('Button not found');
-      return;
-    }
-
-    compassBtn.addEventListener('click', () => {
-      const compassRestaurants = restaurants.filter(
-        (restaurant) => restaurant.company === 'Compass Group'
-      );
-      console.log(compassRestaurants);
-      createTable(compassRestaurants);
-    });
-
-    if (!resetBtn) {
-      console.log('Button not found');
-      return;
-    }
-
-    resetBtn.addEventListener('click', () => {
-      createTable(restaurants);
-    });
   } catch (error) {
     modal.innerHTML = errorModal((error as Error).message);
     modal.showModal();
   }
 };
 
-navigator.geolocation.getCurrentPosition(success, error, positionOptions);
-
+// Main logic
 document.addEventListener('DOMContentLoaded', () => {
-    const menuContainer = document.getElementById('menu-container');
+  try {
+    navigator.geolocation.getCurrentPosition(success, error, positionOptions);
+  } catch (error) {
+    console.error('Error in main logic:', error);
+    modal.innerHTML = errorModal((error as Error).message);
+    modal.showModal();
+  }
 
-    if (menuContainer) {
-      const menuContent = document.createElement('div');
-      menuContent.innerHTML = '<h1>Meny</h1>';
+  const menuContainer = document.getElementById('menu-container');
+
+  if (menuContainer) {
+    const weeklyMenuBtn = document.getElementById('weekly-menu');
+
+    if (weeklyMenuBtn) {
+      weeklyMenuBtn.addEventListener('click', async () => {
+        try {
+          await weeklyMenu('restaurant._id'); // Call the function
+        } catch (error) {
+          console.error('Error fetching weekly menu from container:', error);
+        }
+      });
     } else {
-      console.log('Map container not found');
+      console.log('Weekly menu button not found');
     }
-  });
+  } else {
+    console.log('Menu container not found');
+  }
+});
