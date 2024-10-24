@@ -1,6 +1,6 @@
 import { errorModal, restaurantModal, restaurantRow, weeklyMenu } from './components';
 import { fetchData } from './functions';
-import { DailyMenu } from './interfaces/Menu';
+import { DailyMenu, WeeklyMenu } from './interfaces/Menu';
 import { Restaurant } from './interfaces/Restaurant';
 import { apiUrl, positionOptions } from './interfaces/Variables';
 
@@ -34,34 +34,36 @@ const createTable = (restaurants: Restaurant[]) => {
         });
         // Add highlight
         tr.classList.add('highlight');
-        // Add restaurant data to modal
+
+        // Fetch the daily menu and update modal with daily menu info
         modal.innerHTML = '';
+        const dailyMenu = await fetchData<DailyMenu>(`${apiUrl}/restaurants/daily/${restaurant._id}/fi`);
+        const dailyMenuHtml = restaurantModal(restaurant, dailyMenu);
+        modal.insertAdjacentHTML('beforeend', dailyMenuHtml);
 
-        // Fetch menu
-        const menu = await fetchData<DailyMenu>(
-          apiUrl + `/restaurants/daily/${restaurant._id}/fi`
-        );
-        console.log(menu);
-
-        const menuHtml = restaurantModal(restaurant, menu);
-        modal.insertAdjacentHTML('beforeend', menuHtml);
-
-        // Create the weekly menu button
+        // Create and add the "Weekly Menu" button to the modal
         const weeklyMenuBtn = document.createElement('button');
         weeklyMenuBtn.textContent = 'Weekly Menu';
-        weeklyMenuBtn.addEventListener('click', async () => {
+        modal.appendChild(weeklyMenuBtn);
+
+        // Attach click event to "Weekly Menu" button
+        weeklyMenuBtn.addEventListener('click', async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
           try {
-            const weeklyHtml = await weeklyMenu(restaurant._id); // Ensure this returns a string
-            modal.insertAdjacentHTML('beforeend', weeklyHtml);
+            // Fetch the weekly menu and update modal with weekly menu info
+            const weeklyMenuData = await fetchData<WeeklyMenu>(`${apiUrl}/restaurants/weekly/${restaurant._id}/fi`);
+            console.log('Weekly Menu Data:', weeklyMenuData);
+            const weeklyMenuHtml = weeklyMenu(weeklyMenuData); // Generate the HTML for weekly menu
+            modal.innerHTML = ''; // Clear the modal content
+            modal.insertAdjacentHTML('beforeend', weeklyMenuHtml); // Insert the new weekly menu HTML
           } catch (error) {
             console.error('Error fetching weekly menu:', error);
-            modal.innerHTML = errorModal((error as Error).message);
-            modal.showModal();
+            modal.innerHTML = errorModal((error as Error).message); // Display error if fetch fails
           }
         });
 
-        modal.appendChild(weeklyMenuBtn); // Append the button to the modal
-        modal.showModal(); // Show the modal
+        modal.showModal(); // Show the modal with daily menu and "Weekly Menu" button
       } catch (error) {
         modal.innerHTML = errorModal((error as Error).message);
         modal.showModal();
@@ -70,6 +72,7 @@ const createTable = (restaurants: Restaurant[]) => {
   });
 };
 
+// Geolocation handling and fetching restaurant data
 const error = (err: GeolocationPositionError) => {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 };
@@ -105,25 +108,5 @@ document.addEventListener('DOMContentLoaded', () => {
     console.error('Error in main logic:', error);
     modal.innerHTML = errorModal((error as Error).message);
     modal.showModal();
-  }
-
-  const menuContainer = document.getElementById('menu-container');
-
-  if (menuContainer) {
-    const weeklyMenuBtn = document.getElementById('weekly-menu');
-
-    if (weeklyMenuBtn) {
-      weeklyMenuBtn.addEventListener('click', async () => {
-        try {
-          await weeklyMenu('restaurant._id'); // Call the function
-        } catch (error) {
-          console.error('Error fetching weekly menu from container:', error);
-        }
-      });
-    } else {
-      console.log('Weekly menu button not found');
-    }
-  } else {
-    console.log('Menu container not found');
   }
 });

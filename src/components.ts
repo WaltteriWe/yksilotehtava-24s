@@ -1,6 +1,5 @@
 import {DailyMenu} from './interfaces/Menu';
 import {Restaurant} from './interfaces/Restaurant';
-import { fetchData } from './functions';
 import { WeeklyMenu } from './interfaces/Menu';
 
 const restaurantRow = (restaurant: Restaurant) => {
@@ -53,65 +52,48 @@ export const errorModal = (message: string) => {
   return html;
 };
 
-export const weeklyMenu = async (restaurantId: string): Promise<void> => {
-  try {
-    const weeklyMenu: WeeklyMenu = await fetchData(
-      `/restaurants/weekly/${restaurantId}/fi`
-    );
-    const modal = document.getElementById('modal') as HTMLDialogElement | null;
-    if (!modal) {
-      throw new Error('Modal not found');
+const weeklyMenu = (weeklyMenuData: WeeklyMenu) => {
+  let html = `
+    <table>
+      <tr>
+        <th>Day</th>
+        <th>Course</th>
+        <th>Price</th>
+        <th>Diet</th>
+      </tr>
+  `;
+
+  // Iterate over the days array
+  weeklyMenuData.days.forEach((day) => {
+    const { date, courses } = day;
+
+    if (courses && courses.length > 0) {
+      courses.forEach((course) => {
+        const { name, price, diets } = course;
+
+        // Add the data to the table
+        html += `
+          <tr>
+            <td>${date}</td>
+            <td>${name}</td>
+            <td>${price ?? ' - '}</td>
+            <td>${diets ?? ' - '}</td>
+          </tr>
+        `;
+      });
     } else {
-      const menuContainer = document.getElementById('modal-content') as HTMLDivElement | null;
-      const foodContainer = document.createElement('div');
-
-      if (menuContainer) {
-        menuContainer.innerHTML = '';
-        foodContainer.id = 'weeklyFoodData';
-
-        console.log(weeklyMenu.days);
-        if (!(weeklyMenu.days.length === 0)) {
-          weeklyMenu.days.map((day) => {
-            const date = document.createElement('h2');
-            const dateFoodContainer = document.createElement('div');
-            dateFoodContainer.classList.add('modalFoodData');
-            day.courses.map((data) => {
-              const foodName = document.createElement('h3');
-              foodName.textContent = data.name;
-              const diets = document.createElement('p');
-              diets.textContent = 'Allergeenit: ' + data.diets;
-              const price = document.createElement('p');
-              price.textContent = data.price
-                ? 'Hinta: ' + data.price
-                : 'Hinta: Ei saatavilla';
-
-              dateFoodContainer.append(foodName, diets, price);
-            });
-
-            console.log(day);
-            date.textContent = day.date;
-            foodContainer.append(date, dateFoodContainer);
-            if (menuContainer) {
-              menuContainer.appendChild(foodContainer);
-            }
-          });
-        } else {
-          const noMenu = document.createElement('h4');
-          noMenu.textContent = 'Ei menua saatavilla';
-          foodContainer.appendChild(noMenu);
-          menuContainer.appendChild(foodContainer);
-        }
-      }
-      modal.showModal();
+      html += `
+        <tr>
+          <td>${date}</td>
+          <td colspan="3">No courses available</td>
+        </tr>
+      `;
     }
-  } catch (error) {
-    console.error('Error fetching weekly menu:', error);
-    const modal = document.getElementById('modal') as HTMLDialogElement | null;
-    if (modal) {
-      modal.innerHTML = errorModal((error as Error).message);
-      modal.showModal();
-    }
-  }
+  });
+
+  html += '</table>';
+  return html;
 };
 
-export {restaurantRow, restaurantModal};
+
+export {restaurantRow, restaurantModal, weeklyMenu};
